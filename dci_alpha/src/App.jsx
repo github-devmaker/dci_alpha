@@ -1,35 +1,41 @@
 import { useRef, useState } from 'react'
+import { Routes, Route } from 'react-router-dom'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import MyButton from './components/MyButton'
-import MyProfile from './components/MyProfile'
 import { useEffect } from 'react'
+import Home from './pages/Home'
+import About from './pages/About'
+import Contact from './pages/Contact'
+import Login from './pages/Login'
+import Main from './pages/Main'
+import Error404 from './pages/Error404'
+import NavBar from './components/NavBar'
 
 function App() {
-  // const [count, setCount] = useState(0)
-  // const user = {
-  //   name: 'PEERAPONG'
-  // }
-  // const [people, setPeople] = useState([])
-  // useEffect(() => {
-  //   fetch(`https://jsonplaceholder.typicode.com/users/${count}`)
-  //     .then(res => res.json())
-  //     .then(data => setPeople(data));
-  // }, [count])
-  // function countValue() {
-  //   setCount(count + 1)
-  // }
+  let login = false;
+  login = localStorage.getItem('login', false);
   return (
     <>
-      <div>
-        {/* <p>{count}</p>
-        <button onClick={countValue}>+5</button>
-        <MyButton />
-        <MyProfile data={user} />
-        <MyAbout user={user} /> */}
-        <MyCurrent />
-      </div>
+      {
+        login ? (
+          <>
+            <NavBar />
+            <Routes>
+              <Route path='/main' element={<Main />}></Route>
+              <Route path='/home' element={<Home />}></Route>
+              <Route path='/about' element={<About />}></Route>
+              <Route path='/contact' element={<Contact />}></Route>
+              <Route path='*' element={<Error404 />}></Route>
+            </Routes>
+          </>
+        ) :
+          (
+            <>
+              <Login></Login>
+            </>
+          )
+      }
     </>
   )
 }
@@ -54,18 +60,18 @@ function MyCurrent() {
     count.current = count.current + 1
   })
   const inputElement = useRef();
-  const focusInput = ()=>{
+  const focusInput = () => {
     inputElement.current.focus();
   }
   return (
     <div>
-    <input type="text" ref={inputElement} value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
-    <button onClick={focusInput}>Focus</button>
+      <input type="text" ref={inputElement} value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
+      <button onClick={focusInput}>Focus</button>
 
-    <h1>Render Count Current : {count.current}</h1>
-    <h1>Value is : {inputValue}</h1>
-  </div>
-  ) 
+      <h1>Render Count Current : {count.current}</h1>
+      <h1>Value is : {inputValue}</h1>
+    </div>
+  )
 }
 
 export default App
