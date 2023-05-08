@@ -1,11 +1,16 @@
 import React from 'react'
 import { Container } from '../styles/layoutStyled'
-function Home() {
+
+const Home = ({headname}) => {    
     return (
-        <Container>
-            My Home
-        </Container>
+        <>
+            <Container>
+                {headname}
+            </Container>            
+        </>
     )
 }
+
+
 
 export default Home

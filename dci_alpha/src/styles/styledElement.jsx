@@ -58,7 +58,7 @@ export const Bars = styled(FaBars)`
     color:#fff;
     display:none;
     @media screen and (max-width:768px){
-        display:block;
+        display:${props => props.show ? 'none' : 'block'};
         position:absolute;
         top:0;
         right:0;
@@ -66,4 +66,37 @@ export const Bars = styled(FaBars)`
         font-size:1.8rem;
         transform:translate(-100%,100%);
     }
+`
+
+export const Body = styled.div`
+    display:flex;
+    height:100%;
+`
+
+export const LeftMenu = styled.div`
+    width:12.5rem;
+    background:#fff;
+    color:black;
+    border-right: 1px solid #d9d9d9;
+    @media screen and (max-width:768px){
+        // display:none;
+        width:5rem;
+    }
+`
+export const LeftMenuItem = styled.li`
+    list-style-type:none;
+    padding:1rem 0 1rem 1rem;
+    border-bottom:1px solid #ddd;
+    cursor:pointer;
+    color:rgb(75 75 75);
+    transition:all .5s ease;
+    &:hover {
+        color:white;
+        font-weight:bold;
+        background:rgb(52 160 255 / 85%);
+        padding-left:2rem;
+    }
+    // @media screen and (max-width:768px){
+    //     display:none;
+    // }
 `

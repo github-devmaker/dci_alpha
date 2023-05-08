@@ -11,23 +11,39 @@ import Login from './pages/Login'
 import Main from './pages/Main'
 import Error404 from './pages/Error404'
 import NavBar from './components/NavBar'
+import { Body, LeftMenu, LeftMenuItem } from './styles/styledElement'
 
 function App() {
   let login = false;
   login = localStorage.getItem('login', false);
+  const menus = ["HR","QA","UT","MT","IT"];
   return (
     <>
       {
         login ? (
           <>
             <NavBar />
-            <Routes>
-              <Route path='/main' element={<Main />}></Route>
-              <Route path='/home' element={<Home />}></Route>
-              <Route path='/about' element={<About />}></Route>
-              <Route path='/contact' element={<Contact />}></Route>
-              <Route path='*' element={<Error404 />}></Route>
-            </Routes>
+            <Body>
+              <LeftMenu>
+                <ul>
+                  {
+                    menus.map((menu) => (
+                      <LeftMenuItem key={menu.toString()}>{menu}</LeftMenuItem>
+                    ))
+                  }
+                </ul>
+              </LeftMenu>
+              <div id='content'>
+                <Routes>
+                  <Route path='/' element={<Home />} ></Route>
+                  <Route path='/main' element={<Main />}></Route>
+                  <Route path='/home' element={<Home headname='Props through component' ></Home>} ></Route>
+                  <Route path='/about' element={<About />}></Route>
+                  <Route path='/contact' element={<Contact />}></Route>
+                  <Route path='*' element={<Error404 />}></Route>
+                </Routes>
+              </div>
+            </Body>
           </>
         ) :
           (
