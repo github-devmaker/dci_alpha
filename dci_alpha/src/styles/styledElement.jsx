@@ -1,6 +1,6 @@
 import { NavLink as Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { FaBars } from 'react-icons/fa'
+import { FaBars, FaSearch, FaTrash } from 'react-icons/fa'
 
 export const NavBar = styled.nav`
     background:#34a0ff;
@@ -67,6 +67,10 @@ export const Bars = styled(FaBars)`
         transform:translate(-100%,100%);
     }
 `
+export const FaSearchs = styled(FaSearch)`
+`
+export const FaTrashs = styled(FaTrash)`
+`
 
 export const Body = styled.div`
     display:flex;
@@ -99,4 +103,11 @@ export const LeftMenuItem = styled.li`
     // @media screen and (max-width:768px){
     //     display:none;
     // }
+`
+
+export const ImgUser = styled.img`
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    cursor:pointer;
 `
