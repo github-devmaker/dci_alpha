@@ -13,3 +13,5 @@ npm install @mui/icons-material
 
 npm install @fontsource/roboto
 
+npm install -g react-devtools
+
