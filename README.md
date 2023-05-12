@@ -9,7 +9,9 @@ npm install
 
 npm run dev
 
-install environment 
+npm install react-bootstrap bootstrap
+
+npm install environment 
 
 npm i axios react-icons react-loading react-router-dom@latest styled-components
 
