@@ -39,7 +39,10 @@ npm install @mui/x-date-pickers  // วิธีการใช้ Date Picker
 
 // TAILWIND
 
-npm install -D tailwindcss
+default : npm install -D tailwindcss
+
+vite : npm install -D tailwindcss postcss autoprefixer
+vite : npx tailwindcss init -p // สร้างไฟล์ tailwind.config.js  
 
 // END TAILWIND
 
