@@ -9,6 +9,8 @@ npm install
 
 npm run dev
 
+npm install -D tailwindcss
+
 npm install react-bootstrap bootstrap
 
 npm install environment 
