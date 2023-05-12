@@ -38,7 +38,9 @@ npm install @mui/x-date-pickers  // วิธีการใช้ Date Picker
 
 
 // TAILWIND
+
 npm install -D tailwindcss
+
 // END TAILWIND
 
 // REACT HOOK FORM
