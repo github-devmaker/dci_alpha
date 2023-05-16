@@ -1,6 +1,10 @@
 # dci_alpha
 แพตฟอร์มหลัก
 
+// update package.json
+npm install
+// end update
+
 npm create vite@latest
 
 npm create vite@latest my-react-app -- --template react
@@ -9,7 +13,21 @@ npm install
 
 npm run dev
 
-npm install -D tailwindcss
+npm install -D tailwindcss // ติดตั้ง tailwindcss
+
+npx tailwindcss init  // สร้างไฟล์ tailwind config
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities; 
+
+// init to app.css
+
+npm tailwindcss -i ./src/input.css -o ./dist/output.css --watch  //
+
+
+
+
 
 npm install react-bootstrap bootstrap
 
