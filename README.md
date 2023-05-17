@@ -77,3 +77,11 @@ npm install react-hook-form
 npm install @hookform/error-message
 
 // END HOOK
+
+// FIREBASE 
+
+npm install firebase
+
+npm install -g firebase-tools
+
+// END FIREBASE
