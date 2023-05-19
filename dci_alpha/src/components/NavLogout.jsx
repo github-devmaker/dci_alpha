@@ -22,7 +22,7 @@ function NavLogout() {
                 aria-haspopup="true"
                 aria-expanded={open ? 'true' : undefined}
                 onClick={handleClick}
-                src='https://i.imgur.com/yXOvdOSs.jpg'
+                // src='https://i.imgur.com/yXOvdOSs.jpg'
             />
             <Menu
                 id="fade-menu"

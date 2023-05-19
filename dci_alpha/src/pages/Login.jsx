@@ -11,8 +11,8 @@ export const Login = (props) => {
         axios.get('http://websrv01.dci.daikin.co.jp/BudgetCharts/BudgetRestService/api/authen?username=' + username + '&password=' + password)
             .then(res => {
                 if (res.status == 200) {
-                   localStorage.setItem('login',true);
-                   location.reload();
+                    localStorage.setItem('login', true);
+                    location.reload();
                 }
             })
             .catch(error => {

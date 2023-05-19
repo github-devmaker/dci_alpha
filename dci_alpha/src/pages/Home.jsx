@@ -10,9 +10,6 @@ const Home = ({headname}) => {
                 {headname}
             </Container>            
         </>
-        
-        
-
     )
 }
 

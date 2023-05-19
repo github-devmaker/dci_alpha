@@ -1,7 +1,6 @@
 import { useRef, useState } from 'react'
-import { Routes, Route } from 'react-router-dom'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { Routes, Route, Link } from 'react-router-dom'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
 import { useEffect } from 'react'
 import Home from './pages/Home'
@@ -13,13 +12,74 @@ import Error404 from './pages/Error404'
 import NavBar from './components/NavBar'
 import { Body, LeftMenu, LeftMenuItem } from './styles/styledElement'
 import DataHistory from './pages/DataHistory'
-
+import Modal from './pages/Modal'
+import PageQcStd from './pages/PageQcStd'
+import AddQcStd from './components/QcStd/AddQcStd'
+import axios from 'axios';
+import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
 function App() {
+  var baseUrl = 'http://localhost:5019';
   let login = false;
   login = localStorage.getItem('login', false);
-  const menus = ["HR","QA","UT","MT","IT"];
+  const menus = [
+    { text : 'QC Standards',route:'/qcstd' }
+  ];
+  const [json,setJson] = useState([]);
+  useEffect(() => {
+    const client = new ApolloClient({
+      uri: 'https://flyby-router-demo.herokuapp.com/',
+      cache: new InMemoryCache(),
+    });
+    client
+  .query({
+    query: gql`
+      query Query {
+        locations {
+          id
+          name
+          photo
+        }
+      }
+    `,
+  })
+  .then((result) => {
+    setJson(result.data)
+  });
+//     var myHeaders = new Headers();
+// myHeaders.append("Content-Type", "application/json");
+
+// var graphql = JSON.stringify({
+//   query: `query Query {
+//     users {
+//         id
+//         firstName
+//     }
+//   }`,
+//   variables: {}
+// })
+// var requestOptions = {
+//   method: 'GET',
+//   headers: myHeaders,
+//   body: graphql,
+//   redirect: 'follow'
+// };
+
+// fetch("https://dummyjson.com/users", requestOptions)
+//   .then(response => response.text())
+//   .then(result => setJson(result))
+//   .catch(error => console.log('error', error));
+
+  // axios.get("https://dummyjson.com/users",requestOptions)
+  // .then(res => {
+  //   setJson(res.data);
+  // })
+
+  },[]);
+
   return (
-    <>
+      <>
+      <div>{JSON.stringify(json)}</div>
+      <button >JSON</button>
       {
         login ? (
           <>
@@ -28,8 +88,10 @@ function App() {
               <LeftMenu>
                 <ul>
                   {
-                    menus.map((menu) => (
-                      <LeftMenuItem key={menu.toString()}>{menu}</LeftMenuItem>
+                    menus.map((menu,key) => (
+                      <LeftMenuItem key={key.toString()}>
+                        <Link to={menu.route}>{menu.text}</Link>
+                      </LeftMenuItem>
                     ))
                   }
                 </ul>
@@ -41,6 +103,9 @@ function App() {
                   <Route path='/home' element={<Home headname='Props through component' ></Home>} ></Route>
                   <Route path='/about' element={<About />}></Route>
                   <Route path='/contact' element={<Contact />}></Route>
+                  <Route path='/modal' element={<Modal/>}></Route>
+                  <Route path='/qcstd' element={<PageQcStd/>}></Route>
+                  <Route path='/qcstd/add' element={<AddQcStd/>}></Route>
                   <Route path='*' element={<Error404 />}></Route>
                 </Routes>
               </div>
@@ -53,7 +118,7 @@ function App() {
             </>
           )
       }
-    </>
+      </>
   )
 }
 
