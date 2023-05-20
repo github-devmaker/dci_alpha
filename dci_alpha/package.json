@@ -17,9 +17,9 @@
     "@hookform/error-message": "^2.0.1",
     "@mui/icons-material": "^5.11.16",
     "@mui/lab": "^5.0.0-alpha.129",
-    "@mui/material": "^5.13.0",
+    "@mui/material": "^5.13.1",
     "@mui/styled-engine-sc": "^5.12.0",
-    "@mui/x-data-grid": "^6.3.1",
+    "@mui/x-data-grid": "^6.5.0",
     "@mui/x-date-pickers": "^6.3.1",
     "apollo-server": "^3.12.0",
     "axios": "^1.4.0",
@@ -32,7 +32,10 @@
     "react-hook-form": "^7.43.9",
     "react-icons": "^4.8.0",
     "react-loading": "^2.0.3",
+    "react-redux": "^8.0.5",
     "react-router-dom": "^6.11.1",
+    "reapop": "^4.2.1",
+    "redux": "^4.2.1",
     "styled-components": "^5.3.10"
   },
   "devDependencies": {
@@ -46,6 +49,6 @@
     "eslint-plugin-react-refresh": "^0.3.4",
     "postcss": "^8.4.23",
     "tailwindcss": "^3.3.2",
-    "vite": "^4.3.5"
+    "vite": "^4.3.8"
   }
 }

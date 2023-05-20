@@ -3,6 +3,7 @@ import { Routes, Route, Link } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
 import { useEffect } from 'react'
+import { useSelector } from 'react-redux';
 import Home from './pages/Home'
 import About from './pages/About'
 import Contact from './pages/Contact'
@@ -15,9 +16,12 @@ import DataHistory from './pages/DataHistory'
 import Modal from './pages/Modal'
 import PageQcStd from './pages/PageQcStd'
 import AddQcStd from './components/QcStd/AddQcStd'
-import axios from 'axios';
 import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
+import NavBarPostMan from './components/NavBarPostMan';
+import BodyContext from './components/Body';
+import Nav from './components/NavBar';
 function App() {
+  const message = useSelector((state)=>state.message);
   var baseUrl = 'http://localhost:5019';
   let login = false;
   login = localStorage.getItem('login', false);
@@ -44,42 +48,14 @@ function App() {
   })
   .then((result) => {
     setJson(result.data)
-  });
-//     var myHeaders = new Headers();
-// myHeaders.append("Content-Type", "application/json");
-
-// var graphql = JSON.stringify({
-//   query: `query Query {
-//     users {
-//         id
-//         firstName
-//     }
-//   }`,
-//   variables: {}
-// })
-// var requestOptions = {
-//   method: 'GET',
-//   headers: myHeaders,
-//   body: graphql,
-//   redirect: 'follow'
-// };
-
-// fetch("https://dummyjson.com/users", requestOptions)
-//   .then(response => response.text())
-//   .then(result => setJson(result))
-//   .catch(error => console.log('error', error));
-
-  // axios.get("https://dummyjson.com/users",requestOptions)
-  // .then(res => {
-  //   setJson(res.data);
-  // })
-
+    });
   },[]);
 
   return (
       <>
-      <div>{JSON.stringify(json)}</div>
-      <button >JSON</button>
+      <NavBarPostMan/>
+      <BodyContext/>
+      <p>Alert Message : { message} </p>
       {
         login ? (
           <>

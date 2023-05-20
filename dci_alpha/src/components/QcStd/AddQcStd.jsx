@@ -1,8 +1,7 @@
 import React, { useRef } from 'react'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Grid from '@mui/material/Unstable_Grid2';
 import { BodyAddQcStd, Container } from '../../styles/layoutStyled'
-import { FormControl, InputLabel, OutlinedInput, CircularProgress, Input, InputAdornment, Alert, AlertTitle, Typography, TextField, Select, MenuItem, Box, Divider, Stack, Breadcrumbs, Link, Button } from '@mui/material'
+import { FormControl, InputLabel, OutlinedInput, CircularProgress, Input, InputAdornment, Alert, AlertTitle, Typography, TextField, Select, MenuItem, Box, Divider, Stack, Breadcrumbs, Link, Button, Grid } from '@mui/material'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import ChildQcStd from './ChildQcStd';
@@ -24,9 +23,10 @@ function AddQcStd() {
     const [ser, setSer] = useState('');
     const [pos3, setPos3] = useState('');
     const [pos456, setPos456] = useState('35A');
+    const [alert,setAlert] = useState(false);
     const { register, handleSubmit, onChange, watch, formState: { errors } } = useForm();
     const doSubmit = (data) => {
-        data[data.type + 'Id'] = data.ser + '' + pos3  + ''  + '' + data.no;
+        data[data.type + 'Id'] = data.ser + '' + pos3 + '' + '' + data.no;
         data['fhId1'] = 0;
         data['fhId2'] = 0;
         data['fhId3'] = 0;
@@ -35,19 +35,19 @@ function AddQcStd() {
         data['fhRoundness3'] = 0;
         data['fhJudgement'] = 'OK';
         data['fhRankC'] = 'A';
-        console.log(data);
         setprogress(true)
         const interval = setInterval(() => {
             setDots(dots => dots + '.')
         }, 1000);
-        // return () => clearInterval(interval);
-        axios.post(baseUrl + '/fh/add', data).then(function (res) {
-            if (res.status) {
-                navigete('/qcstd')
-            }
-        }).catch(function (error) {
-            console.log(error)
-        })
+        navigete('/qcstd');
+        // axios.post(baseUrl + '/fh/add', data).then(function (res) {
+        //     if (res.status) {
+        //         navigete('/qcstd')
+        //     }
+        // }).catch(function (error) {
+        //     setprogress(false);
+        //     setAlert(true);
+        // })
     }
     const rTypeTool = [
         { text: 'FRONT HEAD_MASTER', code: 'fh', pattern: [5] },
@@ -113,10 +113,12 @@ function AddQcStd() {
             </Breadcrumbs>
             <form id='formAddQcStd' onSubmit={handleSubmit(doSubmit)}>
                 <BodyAddQcStd variant='outlined'>
-                    <Alert icon = {false} className='mb-3' variant="filled" style={{display: !progress ? 'none' : '',justifyContent:'center',alignItems:'center' }} >
-                        <CircularProgress color="inherit" />&nbsp; 
-                        <span>กำลังบันทึกข้อมูล เมื่อสำเร็จระบบจะท่านกลับยังหน้าแรก {dots} </span>
-                    </Alert>
+                    {
+                        progress && <Alert icon={false} className='mb-3' variant="filled" style={{ justifyContent: 'center', alignItems: 'center' }} >
+                            <CircularProgress color="inherit" />&nbsp;
+                            <span className='pl-3'>กำลังบันทึกข้อมูล เมื่อสำเร็จระบบจะท่านกลับยังหน้าแรก {dots} </span>
+                        </Alert>
+                    }
                     {/* <CircularProgress style={{ display: !progress ? 'none' : '' }} /> */}
                     <Box style={{ display: progress ? 'none' : '' }}>
                         <Grid className='mb-2' container spacing={2}>
@@ -130,7 +132,7 @@ function AddQcStd() {
                             </Grid>
                             {/* <Grid xs={6} container> */}
                             <Grid xs={3}>
-                                <TextField {...register('ser', { required: true, minLength: { value: 2 } })} label='SER. NO.' onKeyUp={handleSerno} inputProps={{ maxLength: 2, readOnly: true }} defaultValue='00' onChange={(e) => setSer(e.target.value)}></TextField>
+                                <TextField {...register('ser', { required: true, minLength: { value: 2 } })} label='SER. NO.' onKeyUp={handleSerno} inputProps={{ maxLength: 2, readOnly: true }} defaultValue='00' onChange={(e) => setSer(e.target.value)} fullWidth></TextField>
                                 {/* {
                                         errors.ser ? (
                                             <>
@@ -172,37 +174,23 @@ function AddQcStd() {
                                     ) : null
                                 }
                             </Grid>
-                            {/* </Grid> */}
-                            {/* <Grid xs={6}>
-                            <TextField {...register('serno', { required: true, minLength: { value: 11, message: 'ต้องมีอย่างน้อย 11 ตัวอักษร' } })} InputLabelProps={{ shrink: true }} label='SER. NO.' fullWidth></TextField>
-                            {
-                                errors.serno ? (
-                                    <>
-                                        {
-                                            errors.serno.type === 'required' && (<p role="alert" className='text-red-500 mt-1'>- กรุณากรอกข้อมูลให้ครบถ้วน</p>)
-                                        }
-                                        {
-                                            errors.serno.type === 'minLength' && (<p role="alert" className='text-red-500 mt-1'>- ต้องมีอย่างน้อย 11 ตัวอักษร</p>)
-                                        }
-                                    </>
-                                ) : null
-                            }
-                        </Grid> */}
-                            {/* <Grid xs={6}>
-                                <TextField id='model' {...register('model', { required: true })} InputLabelProps={{ shrink: true }} label='MODEL' fullWidth></TextField>
-                                {errors.model?.type === 'required' && <p role="alert" className='text-red-500 mt-1'>- กรุณากรอกข้อมูลให้ครบถ้วน</p>}
-                            </Grid> */}
                         </Grid>
                         <Typography sx={{ pb: 1 }} variant="button" display="block" gutterBottom>จุดการควบคุม MASTER WORK</Typography>
                         {viewMaster}
                         <Box className='pt-2'>
                         </Box>
+                        {
+                            alert && <Box>
+                                <Alert severity="error">ไม่สามารเพิ่มข้อมูลได้ ติดต่อ IT 250 (เบียร์)</Alert>
+                            </Box>
+                        }
                         <Box sx={{ pt: 2, display: 'flex', justifyContent: 'flex-end' }}>
                             <Stack spacing={1} direction='row'>
                                 <Button variant='contained' form='formAddQcStd' type='submit'><FaPencilAlt />&nbsp;เพิ่ม</Button>
                                 <Button variant='contained' color='error'>ล้าง</Button>
                             </Stack>
                         </Box>
+
                     </Box>
                 </BodyAddQcStd>
             </form>
