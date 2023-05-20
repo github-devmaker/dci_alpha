@@ -7,3 +7,6 @@ export const PaperMaster = styled(Paper)`
     padding:1rem;
     width:100%;
 `
+export const Buttons = styled.div`
+    
+`

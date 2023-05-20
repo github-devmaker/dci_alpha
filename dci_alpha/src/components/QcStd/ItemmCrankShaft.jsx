@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, Stack, Typography, Card, Paper, TextField, Divider } from '@mui/material'
-import { PaperMaster } from '../../styles/qcstdStyled'
+import { PaperMaster } from '../../styles/QcStyled'
 function ItemmCrankShaft() {
     const rMaster = [
         { text: 'I.D', width: 150 },
