@@ -19,7 +19,7 @@ import AddQcStd from './components/QcStd/AddQcStd'
 import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
 import NavBarPostMan from './components/NavBarPostMan';
 import BodyContext from './components/Body';
-import Nav from './components/NavBar';
+import Nav from './components/NavBar'; 
 function App() {
   const message = useSelector((state)=>state.message);
   var baseUrl = 'http://localhost:5019';
@@ -125,7 +125,6 @@ function MyCurrent() {
     <div>
       <input type="text" ref={inputElement} value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
       <button onClick={focusInput}>Focus</button>
-
       <h1>Render Count Current : {count.current}</h1>
       <h1>Value is : {inputValue}</h1>
     </div>
