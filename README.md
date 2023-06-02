@@ -17,15 +17,11 @@ npm install -D tailwindcss // ติดตั้ง tailwindcss
 
 npx tailwindcss init  // สร้างไฟล์ tailwind config
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities; 
+// @tailwind base;
+// @tailwind components;
+// @tailwind utilities; 
 
 // init to app.css
-
-npm tailwindcss -i ./src/input.css -o ./dist/output.css --watch  //
-
-
 
 
 
